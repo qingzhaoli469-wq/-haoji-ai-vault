@@ -1,33 +1,22 @@
-# 浩记 · AI 密钥管家（PWA）
-
-这是一个无需后端的静态 PWA，适合在 iPhone Safari 中使用并添加到主屏幕。
+# 浩记 · AI 密钥管家（升级版）
 
 ## 功能
-- PBKDF2-SHA-256（310,000 次迭代）派生密钥，AES-256-GCM 加密保险箱内容
-- 添加、编辑、删除、搜索、复制 API Key
+- iPhone 适配的 PWA，可添加到主屏幕
+- PBKDF2 + AES-256-GCM 本地加密存储
+- API Key 新增、编辑、删除、复制、显示/隐藏、搜索与分组
 - 加密备份与恢复
-- PWA / 基础离线缓存
+- API 连通性测试：对填写的 Base URL 请求 `/models`，仅用于兼容 OpenAI 风格接口的基本连通性检查，不代表余额、额度或所有权验证
+- 离线缓存
+
+## 更新 GitHub Pages
+1. 下载并解压 ZIP。
+2. 在 GitHub 仓库中打开每个旧文件，逐个替换为 ZIP 中同名文件：`index.html`、`manifest.webmanifest`、`sw.js`、`README.md`、`.nojekyll`。
+3. 提交更改，等待 Pages 部署完成后刷新网站。
+4. 如 iPhone 仍显示旧版，Safari 打开网站后刷新；必要时关闭旧标签页再重新打开。
 
 ## 重要安全说明
-- 应用代码不会主动上传密钥；数据保存在当前浏览器的 localStorage 中，并以 AES-GCM 加密。
-- 这不是经过第三方安全审计的产品。请先用测试密钥验证，不要一开始就存放高权限生产密钥。
-- 请牢记主密码并保管加密备份。忘记主密码无法解密数据。
-- 清理 Safari 网站数据、换设备或浏览器可能导致本地数据丢失；请定期备份。
-- 静态托管仓库只包含应用代码，不要把 API Key 或备份文件提交到 GitHub。
-- 通用 API 余额查询/在线测试未实现：不同平台接口、鉴权方式和 CORS 政策不同，需要后续逐个平台适配。
-- 建议通过 HTTPS 发布。GitHub Pages 可免费托管公开仓库中的静态站点。
-
-## 用 iPhone 发布（GitHub Pages）
-1. 登录 GitHub，在网页创建一个新的 **Public** repository，例如 `haoji-ai-vault`。
-2. 进入仓库，点 **Add file → Create new file**。
-3. 依次创建并提交这三个文件，内容分别复制自本目录：
-   - `index.html`
-   - `manifest.webmanifest`
-   - `sw.js`
-4. 打开仓库的 **Settings → Pages**。
-5. 在 **Build and deployment** 里选择 **Deploy from a branch**，分支选 `main`，目录选 `/(root)`，保存。
-6. 等待发布完成，页面会显示 `https://你的用户名.github.io/haoji-ai-vault/`。
-7. iPhone Safari 打开该 HTTPS 地址，点分享按钮 → **添加到主屏幕**。
-
-## 数据模型
-本机 localStorage key: `haoji-vault-v1`。主密码不存储，只有 salt、加密校验块和加密数据块被保存。
+- 不要把真实 API Key、主密码或备份文件提交到 GitHub。
+- 数据只保存在当前浏览器本机；清理网站数据可能导致数据丢失。升级前先导出加密备份。
+- 不要把此工具视为经过独立安全审计的密码管理器。
+- “测试接口”会直接向对应 API 服务发送带有 Authorization 请求头的请求。浏览器跨域限制可能导致测试失败。
+- 本版本不声称提供通用余额查询。余额接口因平台而异，部分平台不开放余额查询；需按具体服务商单独适配。
