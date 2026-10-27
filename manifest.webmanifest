@@ -1,0 +1,11 @@
+{
+  "name": "浩记 · AI 密钥管家",
+  "short_name": "浩记密钥管家",
+  "description": "本地加密管理 AI API Key 的个人保险箱",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#10131c",
+  "icons": []
+}
